@@ -41,11 +41,11 @@ class RotatingNode : Node(), Node.OnTapListener {
         if (speedMultiplier == 0.0f) {
             rotationAnimation!!.pause()
         } else {
-            rotationAnimation!!.resume()
-
-            val animatedFraction = rotationAnimation!!.animatedFraction
-            rotationAnimation!!.duration = animationDuration
-            rotationAnimation!!.setCurrentFraction(animatedFraction)
+            rotationAnimation?.let {
+                it.resume()
+                it.duration = animationDuration
+                it.setCurrentFraction(it.animatedFraction)
+            }
         }
         lastSpeedMultiplier = speedMultiplier
     }
@@ -55,29 +55,23 @@ class RotatingNode : Node(), Node.OnTapListener {
         this.degreesPerSecond = degreesPerSecond
     }
 
-    override fun onActivate() {
-        startAnimation()
-    }
+    override fun onActivate() = startAnimation()
 
-    override fun onDeactivate() {
-        stopAnimation()
-    }
+    override fun onDeactivate() = stopAnimation()
 
     private fun startAnimation() {
         if (rotationAnimation != null) {
             return
         }
-        rotationAnimation = createAnimator()
-        rotationAnimation!!.target = this
-        rotationAnimation!!.duration = animationDuration
-        rotationAnimation!!.start()
+        rotationAnimation = createAnimator().apply {
+            target = this@RotatingNode
+            duration = animationDuration
+            start()
+        }
     }
 
     private fun stopAnimation() {
-        if (rotationAnimation == null) {
-            return
-        }
-        rotationAnimation!!.cancel()
+        rotationAnimation?.cancel()
         rotationAnimation = null
     }
 
@@ -90,23 +84,19 @@ class RotatingNode : Node(), Node.OnTapListener {
         val orientation3 = Quaternion.axisAngle(Vector3(0.0f, 1.0f, 0.0f), 240f)
         val orientation4 = Quaternion.axisAngle(Vector3(0.0f, 1.0f, 0.0f), 360f)
 
-        val rotationAnimation = ObjectAnimator()
-        rotationAnimation.setObjectValues(orientation1, orientation2, orientation3, orientation4)
+        return ObjectAnimator().apply {
+            setObjectValues(orientation1, orientation2, orientation3, orientation4)
+            // Next, give it the localRotation property.
+            propertyName = "localRotation"
 
-        // Next, give it the localRotation property.
-        rotationAnimation.propertyName = "localRotation"
+            // Use Sceneform's QuaternionEvaluator.
+            setEvaluator(QuaternionEvaluator())
 
-        // Use Sceneform's QuaternionEvaluator.
-        rotationAnimation.setEvaluator(QuaternionEvaluator())
-
-        //  Allow rotationAnimation to repeat forever
-        rotationAnimation.repeatCount = ObjectAnimator.INFINITE
-        rotationAnimation.repeatMode = ObjectAnimator.RESTART
-        rotationAnimation.interpolator = LinearInterpolator()
-        rotationAnimation.setAutoCancel(true)
-
-        return rotationAnimation
+            //  Allow rotationAnimation to repeat forever
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.RESTART
+            interpolator = LinearInterpolator()
+            setAutoCancel(true)
+        }
     }
-
-
 }
