@@ -2,7 +2,6 @@ package com.laquysoft.arsample
 
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -11,7 +10,6 @@ import android.view.View
 import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
-import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
@@ -81,13 +79,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addNodeToScene(fragment: ArFragment, anchor: Anchor, renderable: Renderable) {
-        val anchorNode = AnchorNode(anchor)
-        val rotatingNode = RotatingNode()
         val node = TransformableNode(fragment.transformationSystem)
-        rotatingNode.renderable = renderable
-        rotatingNode.addChild(node)
-        rotatingNode.setParent(anchorNode)
-        fragment.arSceneView.scene.addChild(anchorNode)
+        fragment.arSceneView.scene.addChild(
+                anchorNode {
+                    anchora = anchor
+                    rotatingNode {
+                        child = node
+                        toRender = renderable
+                    }
+                })
         node.select()
     }
 
