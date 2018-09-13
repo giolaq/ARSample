@@ -78,17 +78,17 @@ class MainActivity : AppCompatActivity() {
                 }
     }
 
-    private fun addNodeToScene(fragment: ArFragment, anchor: Anchor, renderable: Renderable) {
-        val node = TransformableNode(fragment.transformationSystem)
-        fragment.arSceneView.scene.addChild(
-                anchorNode {
-                    anchora = anchor
-                    rotatingNode {
-                        child = node
-                        toRender = renderable
-                    }
-                })
-        node.select()
+    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
+        val scene = scene {
+            anchorNode {
+                anchor = anchora
+                node {
+                    transformationSystem = fragment.transformationSystem
+                    model = renderable
+                }
+            }
+        }
+        fragment.arSceneView.scene.addChild(scene.nodes.first())
     }
 
     private fun getScreenCenter(): android.graphics.Point {
