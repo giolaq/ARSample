@@ -6,7 +6,13 @@ import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.TransformableNode
 import com.google.ar.sceneform.ux.TransformationSystem
+import kotlinx.coroutines.experimental.Dispatchers
 import java.lang.IllegalArgumentException
+import java.util.concurrent.CompletableFuture
+import kotlin.coroutines.experimental.Continuation
+import kotlin.coroutines.experimental.CoroutineContext
+import kotlin.coroutines.experimental.startCoroutine
+import kotlin.coroutines.experimental.suspendCoroutine
 
 @DslMarker
 annotation class ArDsl
@@ -90,3 +96,21 @@ fun scene(setup: SceneBuilder.() -> Unit): Scene {
     sceneBuilder.setup()
     return sceneBuilder.build()
 }
+
+fun <T> future(context: CoroutineContext = Dispatchers.Default, block: suspend () -> T): CompletableFuture<T> =
+        CompletableFutureCoroutine<T>(context).also { block.startCoroutine(completion = it) }
+
+class CompletableFutureCoroutine<T>(override val context: CoroutineContext) : CompletableFuture<T>(), Continuation<T> {
+    override fun resume(value: T) { complete(value) }
+    override fun resumeWithException(exception: Throwable) { completeExceptionally(exception) }
+}
+
+suspend fun <T> CompletableFuture<T>.await(): T =
+        suspendCoroutine { cont: Continuation<T> ->
+            whenComplete { result, exception ->
+                if (exception == null) // the future has been completed normally
+                    cont.resume(result)
+                else // the future has completed with an exception
+                    cont.resumeWithException(exception)
+            }
+        }

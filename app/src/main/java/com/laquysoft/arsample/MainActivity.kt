@@ -66,15 +66,20 @@ class MainActivity : AppCompatActivity() {
         val renderableFuture = ModelRenderable.builder()
                 .setSource(fragment.context, model)
                 .build()
-                .thenAccept { renderable -> addNodeToScene(fragment, anchor, renderable) }
-                .exceptionally { throwable ->
-                    val builder = AlertDialog.Builder(this)
-                    builder.setMessage(throwable.message)
-                            .setTitle("Codelab error!")
-                    val dialog = builder.create()
-                    dialog.show()
-                    null
-                }
+        future {
+            try {
+                val renderable = renderableFuture.await()
+                addNodeToScene(fragment, anchor, renderable)
+            } catch (e: Throwable) {
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage(e.message)
+                        .setTitle("Codelab error!")
+                val dialog = builder.create()
+                dialog.show()
+            }
+        }.join()
+
+
     }
 
     private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
