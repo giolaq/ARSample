@@ -2,6 +2,7 @@ package com.laquysoft.arsample
 
 import com.google.ar.core.Anchor
 import com.google.ar.sceneform.AnchorNode
+import com.google.ar.sceneform.Node
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.TransformableNode
 import com.google.ar.sceneform.ux.TransformationSystem
@@ -14,12 +15,21 @@ annotation class ArDsl
 @ArDsl
 class NodeBuilder(var transformationSystem: TransformationSystem?, var model: Renderable?) {
 
-    fun build(): TransformableNode {
+    fun build(): Node {
         transformationSystem?.let {
             return TransformableNode(transformationSystem).apply {
                 renderable = model
             }
         } ?: throw IllegalArgumentException("TransformationSystem cannot be null")
+    }
+}
+
+@ArDsl
+class RotatingNodeBuilder(var model: Renderable?) {
+    internal val nodes = mutableListOf<com.google.ar.sceneform.Node>()
+
+    fun build(): RotatingNode {
+        return RotatingNode().apply { renderable = model}
     }
 }
 
@@ -39,6 +49,12 @@ class AnchorNodeBuilder(anchor: Anchor?) {
         val nodeBuilder = NodeBuilder(transformationSystem, model)
         nodeBuilder.setup()
         nodes += nodeBuilder.build()
+    }
+
+    fun rotatingNode(model: Renderable? = null, setup: NodeBuilder.() -> Unit = {}) {
+       // val nodeBuilder = NodeBuilder(model)
+       // nodeBuilder.setup()
+       // nodes += nodeBuilder.build()
     }
 }
 

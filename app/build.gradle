@@ -44,3 +44,8 @@ sceneform.asset('sampledata/models/CruiseLiner.obj',
         'default',
         'sampledata/models/CruiseLiner.sfa',
         'src/main/assets/CruiseLiner')
+
+sceneform.asset('sampledata/models/TUI 787.obj',
+        'default',
+        'sampledata/models/TUI 787.sfa',
+        'src/main/assets/TUI 787')
