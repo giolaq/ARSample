@@ -15,7 +15,10 @@ import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-
+import kotlinx.coroutines.experimental.CoroutineStart
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.future.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,20 +69,18 @@ class MainActivity : AppCompatActivity() {
         val renderableFuture = ModelRenderable.builder()
                 .setSource(fragment.context, model)
                 .build()
-        future {
-            try {
-                val renderable = renderableFuture.await()
-                addNodeToScene(fragment, anchor, renderable)
+
+        GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
+             try {
+            addNodeToScene(fragment, anchor, renderableFuture.await())
             } catch (e: Throwable) {
-                val builder = AlertDialog.Builder(this)
-                builder.setMessage(e.message)
+                AlertDialog.Builder(this@MainActivity)
+                        .setMessage(e.message)
                         .setTitle("Codelab error!")
-                val dialog = builder.create()
-                dialog.show()
+                        .create()
+                        .show()
             }
-        }.join()
-
-
+        })
     }
 
     private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
