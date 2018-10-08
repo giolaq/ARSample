@@ -2,7 +2,6 @@ package com.laquysoft.arsample
 
 import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -11,14 +10,15 @@ import android.view.View
 import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
-import com.google.ar.sceneform.AnchorNode
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
-import com.google.ar.sceneform.ux.TransformableNode
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-
+import kotlinx.coroutines.experimental.CoroutineStart
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.future.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            addObject(Uri.parse("CruiseLiner.sfb"))
+            addObject(Uri.parse("TUI 787.sfb"))
         }
     }
 
@@ -69,26 +69,31 @@ class MainActivity : AppCompatActivity() {
         val renderableFuture = ModelRenderable.builder()
                 .setSource(fragment.context, model)
                 .build()
-                .thenAccept { renderable -> addNodeToScene(fragment, anchor, renderable) }
-                .exceptionally { throwable ->
-                    val builder = AlertDialog.Builder(this)
-                    builder.setMessage(throwable.message)
-                            .setTitle("Codelab error!")
-                    val dialog = builder.create()
-                    dialog.show()
-                    null
-                }
+
+        GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
+             try {
+            addNodeToScene(fragment, anchor, renderableFuture.await())
+            } catch (e: Throwable) {
+                AlertDialog.Builder(this@MainActivity)
+                        .setMessage(e.message)
+                        .setTitle("Codelab error!")
+                        .create()
+                        .show()
+            }
+        })
     }
 
-    private fun addNodeToScene(fragment: ArFragment, anchor: Anchor, renderable: Renderable) {
-        val anchorNode = AnchorNode(anchor)
-        val rotatingNode = RotatingNode()
-        val node = TransformableNode(fragment.transformationSystem)
-        rotatingNode.renderable = renderable
-        rotatingNode.addChild(node)
-        rotatingNode.setParent(anchorNode)
-        fragment.arSceneView.scene.addChild(anchorNode)
-        node.select()
+    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
+        val scene = scene {
+            anchorNode {
+                anchor = anchora
+                node {
+                    transformationSystem = fragment.transformationSystem
+                    model = renderable
+                }
+            }
+        }
+        fragment.arSceneView.scene.addChild(scene.nodes.first())
     }
 
     private fun getScreenCenter(): android.graphics.Point {
