@@ -18,7 +18,8 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.coroutines.experimental.CoroutineStart
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.future.*
+import kotlinx.coroutines.experimental.future.await
+import kotlinx.coroutines.experimental.future.future
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,9 +71,13 @@ class MainActivity : AppCompatActivity() {
                 .setSource(fragment.context, model)
                 .build()
 
+        val otherRenderableFuture = ModelRenderable.builder()
+                .setSource(fragment.context, model)
+                .build()
+
         GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
-             try {
-            addNodeToScene(fragment, anchor, renderableFuture.await())
+            try {
+                addNodeToScene(fragment, anchor, renderableFuture.await(), otherRenderableFuture.await())
             } catch (e: Throwable) {
                 AlertDialog.Builder(this@MainActivity)
                         .setMessage(e.message)
@@ -83,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
+    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable, otherRenderable: Renderable) {
         val scene = scene {
             anchorNode {
                 anchor = anchora
@@ -91,6 +96,10 @@ class MainActivity : AppCompatActivity() {
                     transformationSystem = fragment.transformationSystem
                     model = renderable
                 }
+            }
+            node {
+                transformationSystem = fragment.transformationSystem
+                model = otherRenderable
             }
         }
         fragment.arSceneView.scene.addChild(scene.nodes.first())
