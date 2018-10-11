@@ -10,6 +10,7 @@ import android.view.View
 import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
+import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
@@ -23,13 +24,16 @@ import kotlinx.coroutines.experimental.future.future
 
 class MainActivity : AppCompatActivity() {
 
+    private val GLTF_ASSET = "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF/Duck.gltf"
+    private val TUI_PLANE = "TUI 787.sfb"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            addObject(Uri.parse("TUI 787.sfb"))
+            addObject(Uri.parse(TUI_PLANE))
         }
     }
 
@@ -72,8 +76,16 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         val otherRenderableFuture = ModelRenderable.builder()
-                .setSource(fragment.context, model)
+                .setSource(this, RenderableSource.builder().setSource(
+                        this,
+                        Uri.parse(GLTF_ASSET),
+                        RenderableSource.SourceType.GLTF2)
+                        .setScale(0.5f)  // Scale the original model to 50%.
+                        .setRecenterMode(RenderableSource.RecenterMode.ROOT)
+                        .build())
+                .setRegistryId(GLTF_ASSET)
                 .build()
+
 
         GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
             try {
