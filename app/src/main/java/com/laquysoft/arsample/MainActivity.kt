@@ -10,6 +10,7 @@ import android.view.View
 import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
+import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
@@ -18,9 +19,13 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.coroutines.experimental.CoroutineStart
 import kotlinx.coroutines.experimental.Dispatchers
 import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.future.*
+import kotlinx.coroutines.experimental.future.await
+import kotlinx.coroutines.experimental.future.future
 
 class MainActivity : AppCompatActivity() {
+
+    private val GLTF_ASSET = "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF/Duck.gltf"
+    private val TUI_PLANE = "TUI 787.sfb"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            addObject(Uri.parse("TUI 787.sfb"))
+            addObject(Uri.parse(TUI_PLANE))
         }
     }
 
@@ -70,9 +75,21 @@ class MainActivity : AppCompatActivity() {
                 .setSource(fragment.context, model)
                 .build()
 
+        val otherRenderableFuture = ModelRenderable.builder()
+                .setSource(this, RenderableSource.builder().setSource(
+                        this,
+                        Uri.parse(GLTF_ASSET),
+                        RenderableSource.SourceType.GLTF2)
+                        .setScale(0.5f)  // Scale the original model to 50%.
+                        .setRecenterMode(RenderableSource.RecenterMode.ROOT)
+                        .build())
+                .setRegistryId(GLTF_ASSET)
+                .build()
+
+
         GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
-             try {
-            addNodeToScene(fragment, anchor, renderableFuture.await())
+            try {
+                addNodeToScene(fragment, anchor, renderableFuture.await(), otherRenderableFuture.await())
             } catch (e: Throwable) {
                 AlertDialog.Builder(this@MainActivity)
                         .setMessage(e.message)
@@ -83,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
+    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable, otherRenderable: Renderable) {
         val scene = scene {
             anchorNode {
                 anchor = anchora
@@ -91,6 +108,10 @@ class MainActivity : AppCompatActivity() {
                     transformationSystem = fragment.transformationSystem
                     model = renderable
                 }
+            }
+            node {
+                transformationSystem = fragment.transformationSystem
+                model = otherRenderable
             }
         }
         fragment.arSceneView.scene.addChild(scene.nodes.first())
