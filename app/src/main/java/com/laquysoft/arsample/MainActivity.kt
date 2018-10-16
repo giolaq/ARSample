@@ -25,7 +25,8 @@ import kotlinx.coroutines.experimental.future.future
 class MainActivity : AppCompatActivity() {
 
     private val GLTF_ASSET = "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF/Duck.gltf"
-    private val TUI_PLANE = "TUI 787.sfb"
+    private val TUI_PLANE = "TEST-02.sfb"
+    private val POOL_HOUSE = "PoolGuestHouse.sfb"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            addObject(Uri.parse(TUI_PLANE))
+            addObject(Uri.parse(POOL_HOUSE))
         }
     }
 
@@ -75,21 +76,10 @@ class MainActivity : AppCompatActivity() {
                 .setSource(fragment.context, model)
                 .build()
 
-        val otherRenderableFuture = ModelRenderable.builder()
-                .setSource(this, RenderableSource.builder().setSource(
-                        this,
-                        Uri.parse(GLTF_ASSET),
-                        RenderableSource.SourceType.GLTF2)
-                        .setScale(0.5f)  // Scale the original model to 50%.
-                        .setRecenterMode(RenderableSource.RecenterMode.ROOT)
-                        .build())
-                .setRegistryId(GLTF_ASSET)
-                .build()
-
 
         GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
             try {
-                addNodeToScene(fragment, anchor, renderableFuture.await(), otherRenderableFuture.await())
+                addNodeToScene(fragment, anchor, renderableFuture.await())
             } catch (e: Throwable) {
                 AlertDialog.Builder(this@MainActivity)
                         .setMessage(e.message)
@@ -100,7 +90,7 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable, otherRenderable: Renderable) {
+    private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
         val scene = scene {
             anchorNode {
                 anchor = anchora
@@ -108,10 +98,6 @@ class MainActivity : AppCompatActivity() {
                     transformationSystem = fragment.transformationSystem
                     model = renderable
                 }
-            }
-            node {
-                transformationSystem = fragment.transformationSystem
-                model = otherRenderable
             }
         }
         fragment.arSceneView.scene.addChild(scene.nodes.first())

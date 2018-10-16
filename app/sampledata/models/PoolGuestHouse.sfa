@@ -1,0 +1,893 @@
+{
+   bound_relative_root: {
+      x: 0.5,
+      y: 0,
+      z: 0.5,
+   },
+   materials: [
+      {
+         name: "Default_Material",
+         parameters: [
+            {
+               baseColor: null,
+            },
+            {
+               baseColorTint: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "0137_Black",
+         parameters: [
+            {
+               baseColor: null,
+            },
+            {
+               baseColorTint: [
+                  1,
+                  1,
+                  1,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "00_TaME_Bronze02",
+         parameters: [
+            {
+               baseColor: "00_TaME_Bronze02",
+            },
+            {
+               baseColorTint: [
+                  0.69803899999999997,
+                  0.56470600000000004,
+                  0.22745099999999999,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Marmol_Florentino_Arena",
+         parameters: [
+            {
+               baseColor: "Marmol_Florentino_Arena",
+            },
+            {
+               baseColorTint: [
+                  0.89411799999999997,
+                  0.85490200000000005,
+                  0.80392200000000003,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "H1509_ST24",
+         parameters: [
+            {
+               baseColor: "H1509_ST24",
+            },
+            {
+               baseColorTint: [
+                  0.37254900000000002,
+                  0.129412,
+                  0.121569,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "5504552",
+         parameters: [
+            {
+               baseColor: "5504552",
+            },
+            {
+               baseColorTint: [
+                  0.63137299999999996,
+                  0.61960800000000005,
+                  0.57254899999999997,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Translucent_Glass_Gray",
+         parameters: [
+            {
+               baseColor: null,
+            },
+            {
+               baseColorTint: [
+                  0.50196099999999999,
+                  0.50196099999999999,
+                  0.50196099999999999,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: 0.5,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "SW_6504_Sky_High_Modified",
+         parameters: [
+            {
+               baseColor: null,
+            },
+            {
+               baseColorTint: [
+                  0.96862700000000002,
+                  0.95686300000000002,
+                  0.89411799999999997,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Texture_Stucco17",
+         parameters: [
+            {
+               baseColor: "Texture_Stucco17",
+            },
+            {
+               baseColorTint: [
+                  0.91764699999999999,
+                  0.89019599999999999,
+                  0.85490200000000005,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Tile_WellingTon_17",
+         parameters: [
+            {
+               baseColor: "Tile_WellingTon_17",
+            },
+            {
+               baseColorTint: [
+                  0.54509799999999997,
+                  0.50196099999999999,
+                  0.39215699999999998,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "OxFord19",
+         parameters: [
+            {
+               baseColor: "OxFord19",
+            },
+            {
+               baseColorTint: [
+                  0.46274500000000002,
+                  0.69803899999999997,
+                  0.68235299999999999,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "SUC_Floor_022",
+         parameters: [
+            {
+               baseColor: "SUC_Floor_022",
+            },
+            {
+               baseColorTint: [
+                  0.36078399999999999,
+                  0.129412,
+                  0.11372500000000001,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "0135_DarkGray",
+         parameters: [
+            {
+               baseColor: null,
+            },
+            {
+               baseColorTint: [
+                  0.31764700000000001,
+                  0.31764700000000001,
+                  0.31764700000000001,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Material12",
+         parameters: [
+            {
+               baseColor: "Material12",
+            },
+            {
+               baseColorTint: [
+                  0.39607799999999999,
+                  0.478431,
+                  0.478431,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "roof-pantiles5",
+         parameters: [
+            {
+               baseColor: "roof-pantiles5",
+            },
+            {
+               baseColorTint: [
+                  0.49803900000000001,
+                  0.27450999999999998,
+                  0.196078,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "00_MyCust_1b",
+         parameters: [
+            {
+               baseColor: "00_MyCust_1b",
+            },
+            {
+               baseColorTint: [
+                  0.34509800000000002,
+                  0.22745099999999999,
+                  0.22352900000000001,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Metal_Aluminum_Anodized",
+         parameters: [
+            {
+               baseColor: "Metal_Aluminum_Anodized",
+            },
+            {
+               baseColorTint: [
+                  0.792157,
+                  0.819608,
+                  0.85882400000000003,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Vegetation_Ivy_Hedera1",
+         parameters: [
+            {
+               baseColor: "Vegetation_Ivy_Hedera1",
+            },
+            {
+               baseColorTint: [
+                  0.094117999999999993,
+                  0.20000000000000001,
+                  0.058823,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "MT_3",
+         parameters: [
+            {
+               baseColor: "MT_3",
+            },
+            {
+               baseColorTint: [
+                  0.76862699999999995,
+                  0.67058799999999996,
+                  0.41176499999999999,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Rose_Hills",
+         parameters: [
+            {
+               baseColor: "Rose_Hills",
+            },
+            {
+               baseColorTint: [
+                  0.82352899999999996,
+                  0.764706,
+                  0.65882399999999997,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Mediterranean",
+         parameters: [
+            {
+               baseColor: "Mediterranean",
+            },
+            {
+               baseColorTint: [
+                  0.16078400000000001,
+                  0.33725500000000003,
+                  0.52549000000000001,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "CROSSVILLE_ORIGINS-GLASS_WATER-BLEND-12x12",
+         parameters: [
+            {
+               baseColor: "CROSSVILLE_ORIGINS-GLASS_WATER-BLEND-12x12",
+            },
+            {
+               baseColorTint: [
+                  0.52156899999999995,
+                  0.54117599999999999,
+                  0.53725500000000004,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Water_Pool_Light",
+         parameters: [
+            {
+               baseColor: "Water_Pool_Light",
+            },
+            {
+               baseColorTint: [
+                  0.24313699999999999,
+                  0.584314,
+                  0.65098,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: 0.59999999999999998,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "parede",
+         parameters: [
+            {
+               baseColor: "parede",
+            },
+            {
+               baseColorTint: [
+                  0.78823500000000002,
+                  0.76862699999999995,
+                  0.73725499999999999,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Tile_WellingTon_17b",
+         parameters: [
+            {
+               baseColor: "Tile_WellingTon_17b",
+            },
+            {
+               baseColorTint: [
+                  0.54509799999999997,
+                  0.50196099999999999,
+                  0.39215699999999998,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "Concrete_Aggregate_Small",
+         parameters: [
+            {
+               baseColor: "Concrete_Aggregate_Small",
+            },
+            {
+               baseColorTint: [
+                  0.90588199999999997,
+                  0.87451000000000001,
+                  0.83529399999999998,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "tile008-02",
+         parameters: [
+            {
+               baseColor: "tile008-02",
+            },
+            {
+               baseColorTint: [
+                  0.94901999999999997,
+                  0.92156899999999997,
+                  0.87058800000000003,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "JoA1_Marble6",
+         parameters: [
+            {
+               baseColor: "JoA1_Marble6",
+            },
+            {
+               baseColorTint: [
+                  0.082352999999999996,
+                  0.28235300000000002,
+                  0.466667,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+      {
+         name: "0136_Charcoal",
+         parameters: [
+            {
+               baseColor: null,
+            },
+            {
+               baseColorTint: [
+                  0.13725499999999999,
+                  0.13725499999999999,
+                  0.13725499999999999,
+                  1,
+               ],
+            },
+            {
+               metallic: 0,
+            },
+            {
+               roughness: 1,
+            },
+            {
+               opacity: null,
+            },
+         ],
+         source: "build/sceneform_sdk/default_materials/obj_material.sfm",
+      },
+   ],
+   model: {
+      attributes: [
+         "Position",
+         "TexCoord",
+         "Orientation",
+      ],
+      collision: {},
+      file: "sampledata/models/PoolGuestHouse.obj",
+      name: "PoolGuestHouse",
+      recenter: "root",
+      scale: 0.12598699999999999,
+   },
+   samplers: [
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/JoA1_Marble6.jpg",
+         name: "JoA1_Marble6",
+         pipeline_name: "PoolGuestHouse_Textures/JoA1_Marble6.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/H1509_ST24.jpg",
+         name: "H1509_ST24",
+         pipeline_name: "PoolGuestHouse_Textures/H1509_ST24.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/00_TaME_Bronze02.jpg",
+         name: "00_TaME_Bronze02",
+         pipeline_name: "PoolGuestHouse_Textures/00_TaME_Bronze02.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Marmol_Florentino_Arena.jpg",
+         name: "Marmol_Florentino_Arena",
+         pipeline_name: "PoolGuestHouse_Textures/Marmol_Florentino_Arena.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/5504552.jpg",
+         name: "5504552",
+         pipeline_name: "PoolGuestHouse_Textures/5504552.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Mediterranean.jpg",
+         name: "Mediterranean",
+         pipeline_name: "PoolGuestHouse_Textures/Mediterranean.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Texture_Stucco17.jpg",
+         name: "Texture_Stucco17",
+         pipeline_name: "PoolGuestHouse_Textures/Texture_Stucco17.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/SUC_Floor_022.jpg",
+         name: "SUC_Floor_022",
+         pipeline_name: "PoolGuestHouse_Textures/SUC_Floor_022.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Tile_WellingTon_17.jpg",
+         name: "Tile_WellingTon_17",
+         pipeline_name: "PoolGuestHouse_Textures/Tile_WellingTon_17.JPG",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/CROSSVILLE_ORIGINS-GLASS_WATER-BLEND-12x12.jpg",
+         name: "CROSSVILLE_ORIGINS-GLASS_WATER-BLEND-12x12",
+         pipeline_name: "PoolGuestHouse_Textures/CROSSVILLE_ORIGINS-GLASS_WATER-BLEND-12x12.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/OxFord19.jpg",
+         name: "OxFord19",
+         pipeline_name: "PoolGuestHouse_Textures/OxFord19.JPG",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Material12.jpg",
+         name: "Material12",
+         pipeline_name: "PoolGuestHouse_Textures/Material12.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/roof-pantiles5.jpg",
+         name: "roof-pantiles5",
+         pipeline_name: "PoolGuestHouse_Textures/roof-pantiles5.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/00_MyCust_1b.jpg",
+         name: "00_MyCust_1b",
+         pipeline_name: "PoolGuestHouse_Textures/00_MyCust_1b.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Metal_Aluminum_Anodized.jpg",
+         name: "Metal_Aluminum_Anodized",
+         pipeline_name: "PoolGuestHouse_Textures/Metal_Aluminum_Anodized.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Vegetation_Ivy_Hedera1.jpg",
+         name: "Vegetation_Ivy_Hedera1",
+         pipeline_name: "PoolGuestHouse_Textures/Vegetation_Ivy_Hedera1.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/MT_3.jpg",
+         name: "MT_3",
+         pipeline_name: "PoolGuestHouse_Textures/MT_3.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Rose_Hills.jpg",
+         name: "Rose_Hills",
+         pipeline_name: "PoolGuestHouse_Textures/Rose_Hills.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Water_Pool_Light.jpg",
+         name: "Water_Pool_Light",
+         pipeline_name: "PoolGuestHouse_Textures/Water_Pool_Light.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/parede.jpg",
+         name: "parede",
+         pipeline_name: "PoolGuestHouse_Textures/parede.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Tile_WellingTon_17b.jpg",
+         name: "Tile_WellingTon_17b",
+         pipeline_name: "PoolGuestHouse_Textures/Tile_WellingTon_17b.JPG",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/Concrete_Aggregate_Small.jpg",
+         name: "Concrete_Aggregate_Small",
+         pipeline_name: "PoolGuestHouse_Textures/Concrete_Aggregate_Small.jpg",
+      },
+      {
+         file: "sampledata/models\\PoolGuestHouse_Textures/tile008-02.jpg",
+         name: "tile008-02",
+         pipeline_name: "PoolGuestHouse_Textures/tile008-02.jpg",
+      },
+   ],
+   version: "0.52:1",
+}
