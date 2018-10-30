@@ -10,23 +10,22 @@ import android.view.View
 import com.google.ar.core.Anchor
 import com.google.ar.core.HitResult
 import com.google.ar.core.Plane
-import com.google.ar.sceneform.assets.RenderableSource
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.ux.ArFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.coroutines.experimental.CoroutineStart
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.future.await
-import kotlinx.coroutines.experimental.future.future
+import kotlinx.coroutines.*
+import kotlinx.coroutines.future.await
 
 class MainActivity : AppCompatActivity() {
 
     private val GLTF_ASSET = "https://github.com/KhronosGroup/glTF-Sample-Models/raw/master/2.0/Duck/glTF/Duck.gltf"
     private val TUI_PLANE = "TEST-02.sfb"
     private val POOL_HOUSE = "PoolGuestHouse.sfb"
+
+    private val placeObjectJob = Job()
+    private val uiScope = CoroutineScope(Dispatchers.Main + placeObjectJob)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +62,9 @@ class MainActivity : AppCompatActivity() {
             for (hit in hits) {
                 val trackable = hit.trackable
                 if (trackable is Plane && trackable.isPoseInPolygon(hit.hitPose)) {
-                    placeObject((sceneformFragment as ArFragment), hit.createAnchor(), model)
+                    uiScope.launch {
+                        placeObject((sceneformFragment as ArFragment), hit.createAnchor(), model)
+                    }
                     break
 
                 }
@@ -71,23 +72,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun placeObject(fragment: ArFragment, anchor: Anchor, model: Uri) {
+    private suspend fun placeObject(fragment: ArFragment, anchor: Anchor, model: Uri) {
         val renderableFuture = ModelRenderable.builder()
                 .setSource(fragment.context, model)
                 .build()
-
-
-        GlobalScope.future(Dispatchers.Main, CoroutineStart.DEFAULT, {
-            try {
-                addNodeToScene(fragment, anchor, renderableFuture.await())
-            } catch (e: Throwable) {
-                AlertDialog.Builder(this@MainActivity)
-                        .setMessage(e.message)
-                        .setTitle("Codelab error!")
-                        .create()
-                        .show()
-            }
-        })
+        try {
+            addNodeToScene(fragment, anchor, renderableFuture.await())
+        } catch (e: Throwable) {
+            AlertDialog.Builder(this@MainActivity)
+                    .setMessage(e.message)
+                    .setTitle("Codelab error!")
+                    .create()
+                    .show()
+        }
     }
 
     private fun addNodeToScene(fragment: ArFragment, anchora: Anchor, renderable: Renderable) {
@@ -110,5 +107,5 @@ class MainActivity : AppCompatActivity() {
 }
 
 private infix fun com.google.ar.sceneform.Scene.setTo(scene: Scene) {
-  this.addChild(scene.nodes.first())
+    this.addChild(scene.nodes.first())
 }
