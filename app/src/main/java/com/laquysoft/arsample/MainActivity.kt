@@ -100,11 +100,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-        fragment.arSceneView.scene.addChild(scene.nodes.first())
+        fragment.arSceneView.scene setTo scene
     }
 
     private fun getScreenCenter(): android.graphics.Point {
         val vw = findViewById<View>(android.R.id.content)
         return android.graphics.Point(vw.width / 2, vw.height / 2)
     }
+}
+
+private infix fun com.google.ar.sceneform.Scene.setTo(scene: Scene) {
+  this.addChild(scene.nodes.first())
 }
