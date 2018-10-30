@@ -53,3 +53,15 @@ sceneform.asset('sampledata/models/TUI 787.obj',
         'default',
         'sampledata/models/TUI 787.sfa',
         'src/main/assets/TUI 787')
+
+
+
+sceneform.asset('sampledata/models/TEST-02.obj',
+        'default',
+        'sampledata/models/TEST-02.sfa',
+        'src/main/assets/TEST-02')
+
+sceneform.asset('sampledata/models/PoolGuestHouse.obj',
+        'default',
+        'sampledata/models/PoolGuestHouse.sfa',
+        'src/main/assets/PoolGuestHouse')
